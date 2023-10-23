@@ -3,7 +3,7 @@ const {     Router  } = require('express');
 const router = Router();
 
 router.post('/login',(req,rep)=>{
- rep.json({ message : req.body.name +  " " + req.body.pwd})
+ rep.json({ message : 'Success Login'})
  console.log(req.body)
 });
 

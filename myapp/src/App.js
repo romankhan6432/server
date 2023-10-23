@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Button, message } from 'antd';
-
+import axios from 'axios';
 function App() {
   const [name, setName] = useState('');
   const [pwd, setPwd] = useState('');
@@ -12,8 +12,15 @@ function App() {
     // Add your form validation logic here
   };
   const [messageApi, contextHolder] = message.useMessage();
-  const info = () => {
-    messageApi.success('Success Login');
+  const info = async () => {
+   
+     const api = await axios.post('http://192.168.50.107:3001/login',JSON.stringify({ name,pwd}),{
+      headers : {
+        'Content-Type': 'application/json'
+      }
+     })
+ messageApi.success(api.data.message);
+
   };
 
   return (
