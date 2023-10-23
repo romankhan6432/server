@@ -14,7 +14,7 @@ function App() {
   const [messageApi, contextHolder] = message.useMessage();
   const info = async () => {
    
-     const api = await axios.post('http://192.168.50.107:3001/login',JSON.stringify({ name,pwd}),{
+     const api = await axios.post('https://server-9mtt.onrender.com/login',JSON.stringify({ name,pwd}),{
       headers : {
         'Content-Type': 'application/json'
       }
